@@ -1,0 +1,1 @@
+Locate the Waveform folder to under the bin/(configuration)/ folder. If not, please select proper waveform thru UI/propertygrid
