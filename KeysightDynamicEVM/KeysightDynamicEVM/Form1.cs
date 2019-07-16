@@ -371,7 +371,7 @@ namespace KeysightDynamicEVM
             graph.Dock = DockStyle.Fill;
             graph.GraphPane.Title.Text = "EVM Result";
 
-            n6700x.bIsSimulationMode = true;
+            //n6700x.bIsSimulationMode = true;
             //mxg.bIsSimulationMode = true;
             //psg.bIsSimulationMode = true;
             //iSgControl = (SGControl)psg;
