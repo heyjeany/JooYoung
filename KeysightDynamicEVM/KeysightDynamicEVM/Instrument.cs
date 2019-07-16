@@ -179,7 +179,7 @@ namespace KeysightDynamicEVM
                 {
                     this.InstrumentID = "VXT";
                 }
-                else if ( readStr.Contains("MXA") | readStr.Contains("PXA")| readStr.Contains("EXA") | readStr.Contains("UXA"))
+                else //if ( readStr.Contains("MXA") | readStr.Contains("PXA")| readStr.Contains("EXA") | readStr.Contains("UXA"))
                 {
                     this.InstrumentID = "xSA";
                 }
@@ -207,7 +207,10 @@ namespace KeysightDynamicEVM
                 }
                 else
                 {
-                    SendCommand("POWER:ATT " + range2Set.ToString() + "DBM");
+                    int nRange = (int)(range2Set);
+                    if (nRange >= 20)
+                        nRange = 20;
+                    SendCommand("POWER:ATT " + ((int)(nRange)).ToString());
                 }
             }
             catch( Exception ex )

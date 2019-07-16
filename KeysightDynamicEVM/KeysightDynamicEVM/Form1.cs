@@ -254,7 +254,7 @@ namespace KeysightDynamicEVM
                 // set External trigger to EXT1
                 xSA.SendCommand("TRIG:EVM:SOUR EXT1");
                 // Set input range 
-                xSA.SendCommand("POWER:RANGE " + (PowerlevelToTest[0] + parameter.Range).ToString());
+                xSA.SetAttenuator((PowerlevelToTest[0] + parameter.Range));
                 // turn off average
                 xSA.SendCommand("EVM:AVER:STAT OFF");
                 // Equalizer training setting
@@ -279,7 +279,7 @@ namespace KeysightDynamicEVM
                     iSgControl.SendCommand("POWER " + PowerlevelToTest[PowerlevelLoop].ToString(".00") + "DBM");
                    
                     // added for auto range clippnig : Jooyoung 
-                    xSA.SendCommand("SENSe:POWer:RF:RANGe:OPTimize IMMediate");
+                   
                     //xSA.SendCommand("POWER:ATT 15");
                     xSA.SetAttenuator(PowerlevelToTest[PowerlevelLoop] + parameter.Range);
                     //xSA.SendCommand("POWER:ATT " + ((int)((PowerlevelToTest[PowerlevelLoop] + parameter.Range))).ToString());
@@ -295,6 +295,10 @@ namespace KeysightDynamicEVM
 
                             n6700x.SendCommand("SOUR:VOLT:LEVEL:IMM:AMP " + VoltLevelToTest[VoltLoop].ToString() + ",(@1)");
                             n6700x.SendCommand("OUTPUT:STATE 1" + ",(@1)");
+                            Thread.Sleep(parameter.GapBtwMeasure);
+                            xSA.SendCommand("SENSe:POWer:RF:RANGe:OPTimize IMMediate");
+
+
                             Thread.Sleep(parameter.GapBtwMeasure);
                             for (int repeat = 0; repeat < nRepeat; repeat++)
                             {
@@ -368,7 +372,8 @@ namespace KeysightDynamicEVM
             graph.GraphPane.Title.Text = "EVM Result";
 
             n6700x.bIsSimulationMode = true;
-
+            //mxg.bIsSimulationMode = true;
+            //psg.bIsSimulationMode = true;
             //iSgControl = (SGControl)psg;
 
         }
@@ -602,8 +607,21 @@ namespace KeysightDynamicEVM
         {
             try
             {
-                // Select WLAN App
-                xSA.SendCommand("INST:SEL WLAN");
+                if (!xSA.Initialized)
+                {
+                    Log("Initialize xSA!");
+                    xSA.Initialize(parameter.xSAVISAAddress);
+                    xSA.SendCommand("inst:sel wlan");
+                    Thread.Sleep(2000);
+                    //xSA.SendCommand("INST:SEL WLAN");
+                    // Select 11ax 80Mhz
+                    xSA.SendCommand("RAD:STAN AX80");
+                    // configure EVM measurement
+
+                }
+                    // Select WLAN App
+                    xSA.SendCommand("INST:SEL WLAN");
+
                 // Select 11ax 80Mhz
                 xSA.SendCommand("RAD:STAN AX80");
                 // configure EVM measurement
@@ -613,8 +631,8 @@ namespace KeysightDynamicEVM
 
                 xSA.SendCommand("FREQ:CENT " + parameter.SGFreqInMhz + "MHZ");
                 // Set input range 
-                xSA.SendCommand("POWER:RANGE " + parameter.Range.ToString());
-
+                //xSA.SendCommand("POWER:RANGE " + parameter.Range.ToString());
+                xSA.SetAttenuator(parameter.Range);
 
                 //xSA.SendCommand("POWER:RANGE " + (PowerlevelToTest[PowerlevelLoop] + parameter.Range).ToString());
                 // added for auto range clippnig : Jooyoung 

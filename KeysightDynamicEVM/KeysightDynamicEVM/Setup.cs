@@ -54,8 +54,12 @@ namespace KeysightDynamicEVM
   
             SGVISAAddress = "TCPIP0::10.112.36.195::inst0::INSTR";
             SGVISAAddress = "TCPIP0::141.121.90.121::inst0::INSTR";
+            SGVISAAddress = "TCPIP0::141.121.151.76::inst0::INSTR";
+
             xSAVISAAddress = "TCPIP0::10.112.39.94::hislip1::INSTR";
             xSAVISAAddress = "TCPIP0::141.121.92.252::hislip1::INSTR";
+            xSAVISAAddress = "TCPIP0::141.121.151.180::hislip0::INSTR";
+
             SGFreqInMhz = 400;
             Range = 10;
             SGPowerLevel = 0;
