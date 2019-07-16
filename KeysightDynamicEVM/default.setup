@@ -1,0 +1,17 @@
+﻿<Complex name="Root" type="KeysightDynamicEVM.PARAMETERCLASS, KeysightDynamicEVM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+  <Properties>
+    <Simple name="WaveformFileName" value=".\\waveform\\Duty_76_173_68us.wfm" />
+    <Simple name="MXGVISAAddress" value="TCPIP0::10.112.39.129::inst0::INSTR" />
+    <Simple name="MXGFreqInMhz" value="2100" />
+    <Simple name="MXGPowerLevel" value="0" />
+    <Simple name="xSAVISAAddress" value="TCPIP0::10.112.39.94::hislip1::INSTR" />
+    <Simple name="Range" value="10" />
+    <Simple name="N6700VISAAddress" value="TCPIP0::10.112.37.80::inst0::INSTR" />
+    <Simple name="Voltage" value="3" />
+    <Simple name="Current" value="3" />
+    <Simple name="T1" value="5E-07" />
+    <Simple name="T2" value="5E-07" />
+    <Simple name="DutyCycle" value="0.76" />
+    <Simple name="GapBtwMeasure" value="100" />
+  </Properties>
+</Complex>
